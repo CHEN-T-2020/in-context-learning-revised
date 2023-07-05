@@ -1,0 +1,28 @@
+model:
+    family: mlp
+    n_embd: 256
+    n_layer: 8
+    n_head: 8
+    n_dims: 5
+    n_positions: 11
+
+training:
+    resume_id: mlp_5dim_8layer_256_R&L
+    task: linear_regression
+    data: gaussian
+    task_kwargs: {}
+    batch_size: 64
+    learning_rate: 0.0001
+    save_every_steps: 1000
+    keep_every_steps: 100000
+    train_steps: 50001
+    curriculum:
+        dims: {'start': 5, 'end': 5, 'inc': 1, 'interval': 2000}
+        points: {'start': 11, 'end': 11, 'inc': 2, 'interval': 2000}
+out_dir: ../models/linear_regression
+wandb:
+    name: mlp_5dim_8layer_256_R&L
+    project: in-context-training
+    entity: tianqi_chen
+    notes: 
+    log_every_steps: 100
