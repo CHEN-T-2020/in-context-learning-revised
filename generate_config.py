@@ -2,11 +2,16 @@ import os
 
 family = "gpt2"
 n_embd = 256
-n_layer = 8
-n_dims = 5
-n_positions = 2 * n_dims + 1
+n_layer = 12
+n_dims = 20
+if family == "mlp":
+    n_positions = 2 * n_dims + 1
+elif family == "gpt2":
+    n_positions = 5 * n_dims + 1
 
-date = "4July"
+train_steps = 500001
+
+date = "5July"
 name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_RL"
 
 # 指定文件夹路径
@@ -32,8 +37,24 @@ def generate_config_file(folder_path, model_config, training_config):
         else:
             training_config_str += f"    {key}: {value}\n"
 
+    # 生成out_dir配置文档
+    out_dir_config_str = "out_dir: ../models/linear_regression\n"
+
+    # 生成wandb配置文档
+    wandb_config_str = "wandb:\n"
+    for key, value in wandb_config.items():
+        wandb_config_str += f"    {key}: {value}\n"
+
     # 生成完整的配置文档内容
-    config_content = model_config_str + "\n" + training_config_str
+    config_content = (
+        model_config_str
+        + "\n"
+        + training_config_str
+        + "\n"
+        + out_dir_config_str
+        + "\n"
+        + wandb_config_str
+    )
 
     # 生成文件路径
     file_path = os.path.join(
@@ -66,7 +87,7 @@ training_config = {
     "learning_rate": 0.0001,
     "save_every_steps": 1000,
     "keep_every_steps": 100000,
-    "train_steps": 50001,
+    "train_steps": train_steps,
     "curriculum": {
         "dims": {"start": n_dims, "end": n_dims, "inc": 1, "interval": 2000},
         "points": {
@@ -76,15 +97,16 @@ training_config = {
             "interval": 2000,
         },
     },
-    "out_dir": "../models/linear_regression",
-    "wandb": {
-        "name": name,
-        "project": "in-context-training",
-        "entity": "tianqi_chen",
-        "notes": "",
-        "log_every_steps": 100,
-    },
+}
+
+wandb_config = {
+    "name": name,
+    "project": "in-context-training",
+    "entity": "tianqi_chen",
+    "notes": "",
+    "log_every_steps": 1000,
 }
 
 # 生成配置文件
 generate_config_file(folder_path, model_config, training_config)
+print(f"file path: {folder_path}/{name}.yaml")

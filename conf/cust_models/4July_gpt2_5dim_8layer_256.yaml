@@ -4,7 +4,7 @@ model:
     n_layer: 8
     n_head: 8
     n_dims: 5
-    n_positions: 11
+    n_positions: 26
 
 training:
     resume_id: 4July_gpt2_5dim_8layer_256_R&L

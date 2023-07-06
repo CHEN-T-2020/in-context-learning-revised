@@ -9,8 +9,8 @@ def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
-model1 = MLPModel(n_dims=5, n_positions=11, n_embd=1024, n_layer=20)
-model2 = TransformerModel(n_dims=5, n_positions=11, n_embd=256, n_layer=8)
+model1 = MLPModel(n_dims=20, n_positions=11, n_embd=1024, n_layer=22)
+model2 = TransformerModel(n_dims=20, n_positions=11, n_embd=256, n_layer=12)
 
 num_params1 = count_parameters(model1)
 num_params2 = count_parameters(model2)
