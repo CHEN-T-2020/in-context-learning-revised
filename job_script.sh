@@ -17,8 +17,7 @@ source activate /home/tianqi/anaconda3/envs/in-context-learning
 
 # Task 1
 echo "Running Task 1"
-python train.py --config conf/cust_models/5July_gpt2_20dim_12layer_256_RL.yaml
-
+python train.py --config conf/cust_models/4Aug_lstm_3dim_20layer_256_lr1e-4_dropout0.1_positionalEmbedding.yaml
 
 
 

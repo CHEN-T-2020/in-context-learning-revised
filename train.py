@@ -16,7 +16,7 @@ from models import build_model
 
 import wandb
 
-DEBUG = False
+DEBUG = True
 
 
 torch.backends.cudnn.benchmark = True

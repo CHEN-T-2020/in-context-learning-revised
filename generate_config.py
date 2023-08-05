@@ -1,18 +1,21 @@
 import os
 
-family = "gpt2"
+family = "lstm"
 n_embd = 256
-n_layer = 12
-n_dims = 20
+n_layer = 20
+n_dims = 3
+
+lr = 0.0001
+
 if family == "mlp":
     n_positions = 2 * n_dims + 1
-elif family == "gpt2":
+elif family == "gpt2" or family == "lstm":
     n_positions = 5 * n_dims + 1
 
 train_steps = 500001
 
-date = "5July"
-name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_RL"
+date = "4Aug"
+name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr1e-4_dropout0.1_positionalEmbedding"
 
 # 指定文件夹路径
 folder_path = "/home/tianqi/in-context-learning-main/src/conf/cust_models"
@@ -84,7 +87,7 @@ training_config = {
     "data": "gaussian",
     "task_kwargs": "{" + "}",
     "batch_size": 64,
-    "learning_rate": 0.0001,
+    "learning_rate": lr,
     "save_every_steps": 1000,
     "keep_every_steps": 100000,
     "train_steps": train_steps,

@@ -15,8 +15,9 @@ palette = sns.color_palette("colorblind")
 
 relevant_model_names = {
     "linear_regression": [
-        # "Transformer",  # ???
-        "MLP",  # mlp added here to replace Transformer
+        # "Transformer",
+        # "MLP",  # mlp added here to replace Transformer
+        "LSTM",  # lstm added here to replace Transformer
         "Least Squares",
         "3-Nearest Neighbors",
         "Averaging",
