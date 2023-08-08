@@ -1,11 +1,14 @@
 import os
 
 family = "lstm"
-n_embd = 256
-n_layer = 20
-n_dims = 3
+n_embd = 512
+n_layer = 5
+n_dims = 20
 
 lr = 0.0001
+p_dropout = 0
+
+date = "7Aug"
 
 if family == "mlp":
     n_positions = 2 * n_dims + 1
@@ -14,8 +17,10 @@ elif family == "gpt2" or family == "lstm":
 
 train_steps = 500001
 
-date = "4Aug"
-name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr1e-4_dropout0.1_positionalEmbedding"
+n_positions = 10 * n_dims + 1
+
+
+name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}"
 
 # 指定文件夹路径
 folder_path = "/home/tianqi/in-context-learning-main/src/conf/cust_models"
@@ -78,6 +83,7 @@ model_config = {
     "n_head": 8,
     "n_dims": n_dims,
     "n_positions": n_positions,
+    "p_dropout": p_dropout,
 }
 
 # 训练配置

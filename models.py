@@ -42,6 +42,7 @@ def build_model(conf):
             n_embd=conf.n_embd,
             n_layer=conf.n_layer,
             bidirectional=False,  # 设置为True以使用双向LSTM，如果需要的话
+            p_dropout=conf.p_dropout,
         )
 
     else:
@@ -132,14 +133,6 @@ class MLP(nn.Module):
         for i, layer in enumerate(self.layers):
             if (i + 1) % 3 == 0 and x.shape == layer(x).shape:
                 # Apply residual connection every two layers if dimensions match
-                # if DEBUG:
-                #     print("Inside models MLP:forward")
-                #     print(f"add layer norm in {i}th layer")
-                #     print(f"i: {i}")
-                #     print(f"layer: {layer}")
-                #     print(f"x.shape: {x.shape}")
-                #     print(f"layer(x).shape: {layer(x).shape}")
-                #     print(f"layer(x): {layer(x)}\n")
                 x = x + layer(x)
             else:
                 x = layer(x)
@@ -331,7 +324,9 @@ class TransformerModel(nn.Module):
 
 
 class LSTMModel(nn.Module):
-    def __init__(self, n_dims, n_positions, n_embd, n_layer, bidirectional=False):
+    def __init__(
+        self, n_dims, n_positions, n_embd, n_layer, bidirectional=False, p_dropout=0
+    ):
         super(LSTMModel, self).__init__()
         self.name = f"lstm_embd={n_embd}_layer={n_layer}_{'bidirectional' if bidirectional else 'unidirectional'}"
 
@@ -340,8 +335,10 @@ class LSTMModel(nn.Module):
         self.n_embd = n_embd
         self.n_layer = n_layer
         self.bidirectional = bidirectional
+        self.p_dropout = p_dropout
 
         self._read_in = nn.Linear(n_dims, n_embd)
+
         self.wpe = nn.Embedding(n_positions, self.n_embd)  # positional embedding
         print(f"self.wpe: {self.wpe}")
 
@@ -351,7 +348,7 @@ class LSTMModel(nn.Module):
             num_layers=n_layer,
             bidirectional=bidirectional,
             batch_first=True,
-            dropout=0.1,  # dropout rate
+            dropout=p_dropout,  # dropout rate
         )
         self._read_out = nn.Linear(n_embd, 1)
 
@@ -379,16 +376,16 @@ class LSTMModel(nn.Module):
                 raise ValueError("inds contain indices where xs and ys are not defined")
 
         zs = self._combine(xs, ys)
-        embeds = self._read_in(zs)  # token embedding
+        embeds = self._read_in(zs)  # token embedding: bsize x n_points x n_embd
 
-        # Add positional embedding（modified: input_shape[-1]--》input_shape[-2]）
-        input_shape = embeds.size()
-        position_ids = torch.arange(
-            0, input_shape[-2], dtype=torch.long, device=zs.device
-        )
-        position_ids = position_ids.unsqueeze(0).view(-1, input_shape[-2])
-        position_embeds = self.wpe(position_ids)
-        embeds = position_embeds + embeds
+        # # Add positional embedding（modified: input_shape[-1]--》input_shape[-2]）
+        # input_shape = embeds.size()
+        # position_ids = torch.arange(
+        #     0, input_shape[-2], dtype=torch.long, device=zs.device
+        # )
+        # position_ids = position_ids.unsqueeze(0).view(-1, input_shape[-2])
+        # position_embeds = self.wpe(position_ids)
+        # embeds = position_embeds + embeds
 
         if DEBUG_forward:
             print("Inside models LSTMModel:forward")
