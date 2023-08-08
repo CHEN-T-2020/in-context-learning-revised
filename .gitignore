@@ -1,0 +1,11 @@
+.ipynb_checkpoints
+__pycache__
+models.zip
+models
+.txt
+.log
+*.log
+
+src/conf/cust_models/*
+src/conf/mlp_models/*
+src/slurm_output/*
