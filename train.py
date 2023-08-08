@@ -22,7 +22,6 @@ DEBUG = True
 torch.backends.cudnn.benchmark = True
 
 
-# don't have to change, right？
 def train_step(model, xs, ys, optimizer, loss_func):
     optimizer.zero_grad()
     output = model(xs, ys)  # == model.forward(xs, ys)

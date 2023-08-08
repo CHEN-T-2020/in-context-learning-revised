@@ -325,7 +325,7 @@ class TransformerModel(nn.Module):
 
 class LSTMModel(nn.Module):
     def __init__(
-        self, n_dims, n_positions, n_embd, n_layer, bidirectional=False, p_dropout=0
+        self, n_dims, n_positions, n_embd, n_layer, bidirectional=False, p_dropout=0.0
     ):
         super(LSTMModel, self).__init__()
         self.name = f"lstm_embd={n_embd}_layer={n_layer}_{'bidirectional' if bidirectional else 'unidirectional'}"
@@ -376,16 +376,28 @@ class LSTMModel(nn.Module):
                 raise ValueError("inds contain indices where xs and ys are not defined")
 
         zs = self._combine(xs, ys)
-        embeds = self._read_in(zs)  # token embedding: bsize x n_points x n_embd
+        embeds = self._read_in(zs)  # token embedding: bsize x 2*n_points x n_embd
 
-        # # Add positional embedding（modified: input_shape[-1]--》input_shape[-2]）
-        # input_shape = embeds.size()
-        # position_ids = torch.arange(
-        #     0, input_shape[-2], dtype=torch.long, device=zs.device
-        # )
-        # position_ids = position_ids.unsqueeze(0).view(-1, input_shape[-2])
-        # position_embeds = self.wpe(position_ids)
-        # embeds = position_embeds + embeds
+        # Add positional embedding
+        input_shape = embeds.size()
+        position_ids = torch.arange(
+            0, input_shape[-2], dtype=torch.long, device=zs.device
+        )
+        position_ids = position_ids.unsqueeze(0).view(-1, input_shape[-2])
+        position_embeds = self.wpe(position_ids)
+
+        position_embeds = position_embeds.repeat(
+            input_shape[0], 1, 1
+        )  # input_shape[0]:batch size
+
+        print(f"position_embeds.shape: {position_embeds.shape}")
+        print(f"embeds.shape: {embeds.shape}")
+        print(f"position_embeds.device: {position_embeds.device}")
+        print(f"embeds.device: {embeds.device}")
+
+        embeds = position_embeds + embeds
+        print(f"embeds.shape: {embeds.shape}")
+        print(f"embeds.device: {embeds.device}")
 
         if DEBUG_forward:
             print("Inside models LSTMModel:forward")

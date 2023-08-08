@@ -100,8 +100,8 @@ training_config = {
     "curriculum": {
         "dims": {"start": n_dims, "end": n_dims, "inc": 1, "interval": 2000},
         "points": {
-            "start": n_positions,
-            "end": n_positions,
+            "start": 2 * n_dims + 1,
+            "end": 2 * n_dims + 1,
             "inc": 2,
             "interval": 2000,
         },
