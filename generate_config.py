@@ -1,14 +1,14 @@
 import os
 
 family = "lstm"
-n_embd = 512
-n_layer = 5
+n_embd = 256
+n_layer = 10
 n_dims = 20
 
 lr = 0.0001
-p_dropout = 0
+p_dropout = 0.1
 
-date = "7Aug"
+date = "8Aug_run4"
 
 if family == "mlp":
     n_positions = 2 * n_dims + 1
@@ -16,8 +16,6 @@ elif family == "gpt2" or family == "lstm":
     n_positions = 5 * n_dims + 1
 
 train_steps = 500001
-
-n_positions = 10 * n_dims + 1
 
 
 name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}"

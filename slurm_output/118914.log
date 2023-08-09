@@ -1,3 +1,0 @@
-Running Task 1
-CerberusError: config could not be validated against schema. The errors are,
-{'training': [{'learning_rate': ['must be of float type']}]}
