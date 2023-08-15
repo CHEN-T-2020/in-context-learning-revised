@@ -16,7 +16,7 @@ from models import build_model
 
 import wandb
 
-DEBUG = True
+DEBUG = False
 
 
 torch.backends.cudnn.benchmark = True
@@ -80,6 +80,10 @@ def train(model, args):
             seeds = sample_seeds(num_training_examples, bsize)
             data_sampler_args["seeds"] = seeds
             task_sampler_args["seeds"] = [s + 1 for s in seeds]
+            if DEBUG:
+                print("seeds: ", seeds)
+                print("data_sampler_args: ", data_sampler_args)
+                print("task_sampler_args: ", task_sampler_args)
 
         xs = data_sampler.sample_xs(
             curriculum.n_points,

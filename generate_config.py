@@ -1,14 +1,16 @@
 import os
 
 family = "lstm"
-n_embd = 256
-n_layer = 10
+n_embd = 512
+n_layer = 5
+
 n_dims = 20
 
 lr = 0.0001
 p_dropout = 0.1
+curriculum = True
 
-date = "8Aug_run4"
+date = "14Aug"
 
 if family == "mlp":
     n_positions = 2 * n_dims + 1
@@ -17,8 +19,14 @@ elif family == "gpt2" or family == "lstm":
 
 train_steps = 500001
 
+# for curriculum learning
+n_dims_start = n_dims // 4 if curriculum else n_dims
+n_dims_end = n_dims
+n_points_start = 2 * n_dims_start + 1
+n_points_end = 2 * n_dims_end + 1
 
-name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}"
+
+name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}_curriculum{curriculum}"
 
 # 指定文件夹路径
 folder_path = "/home/tianqi/in-context-learning-main/src/conf/cust_models"
@@ -96,10 +104,10 @@ training_config = {
     "keep_every_steps": 100000,
     "train_steps": train_steps,
     "curriculum": {
-        "dims": {"start": n_dims, "end": n_dims, "inc": 1, "interval": 2000},
+        "dims": {"start": n_dims_start, "end": n_dims_end, "inc": 1, "interval": 2000},
         "points": {
-            "start": 2 * n_dims + 1,
-            "end": 2 * n_dims + 1,
+            "start": n_points_start,
+            "end": n_points_end,
             "inc": 2,
             "interval": 2000,
         },

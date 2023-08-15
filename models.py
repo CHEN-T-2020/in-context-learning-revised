@@ -390,14 +390,7 @@ class LSTMModel(nn.Module):
             input_shape[0], 1, 1
         )  # input_shape[0]:batch size
 
-        print(f"position_embeds.shape: {position_embeds.shape}")
-        print(f"embeds.shape: {embeds.shape}")
-        print(f"position_embeds.device: {position_embeds.device}")
-        print(f"embeds.device: {embeds.device}")
-
         embeds = position_embeds + embeds
-        print(f"embeds.shape: {embeds.shape}")
-        print(f"embeds.device: {embeds.device}")
 
         if DEBUG_forward:
             print("Inside models LSTMModel:forward")

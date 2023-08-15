@@ -1,14 +1,13 @@
 model:
     family: lstm
     n_embd: 256
-    n_layer: 20
-    n_head: 8 # do not need if model is mlp
+    n_layer: 10
+    n_head: 8 # do not need if model is mlp or lstm
 
     n_dims: 20
     n_positions: 101
     p_dropout: 0.0
     
-
 
 training:
     # resume_id: gpt_dim10_l12 # use for run_id and in the folder name
@@ -16,11 +15,12 @@ training:
     task: linear_regression
     data: gaussian
     task_kwargs: {}
-    batch_size: 4 #originally 64
+    batch_size: 100 #originally 64
     learning_rate: 0.0001 #originally 0.0001
     save_every_steps: 100 #originally 1000
     keep_every_steps: 100000
-    train_steps: 501 
+    train_steps: 50001 
+    num_training_examples: 100 # total number of training examples
     curriculum:
         dims:
             start: 20
@@ -28,8 +28,8 @@ training:
             inc: 1
             interval: 2000
         points:
-            start: 10
-            end: 10
+            start: 41
+            end: 41
             inc: 2
             interval: 2000
 
