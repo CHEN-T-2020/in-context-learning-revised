@@ -6,8 +6,8 @@ model:
 
     n_dims: 20
     n_positions: 101
-    p_dropout: 0.0
-    
+    p_dropout: 0.1
+    has_p_embedding: True
 
 training:
     # resume_id: gpt_dim10_l12 # use for run_id and in the folder name

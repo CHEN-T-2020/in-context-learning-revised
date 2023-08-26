@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 family = "lstm"
 n_embd = 512
@@ -7,10 +8,13 @@ n_layer = 5
 n_dims = 20
 
 lr = 0.0001
-p_dropout = 0.1
-curriculum = True
 
-date = "14Aug"
+p_dropout = 0
+curriculum = False
+has_p_embedding = False
+
+date = "25Aug"
+tag = "5layer_droupout0_run5"
 
 if family == "mlp":
     n_positions = 2 * n_dims + 1
@@ -26,7 +30,7 @@ n_points_start = 2 * n_dims_start + 1
 n_points_end = 2 * n_dims_end + 1
 
 
-name = f"{date}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}_curriculum{curriculum}"
+name = f"{date}_{tag}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}_curriculum{curriculum}_p_embedding{has_p_embedding}"
 
 # 指定文件夹路径
 folder_path = "/home/tianqi/in-context-learning-main/src/conf/cust_models"
@@ -90,6 +94,7 @@ model_config = {
     "n_dims": n_dims,
     "n_positions": n_positions,
     "p_dropout": p_dropout,
+    "has_p_embedding": has_p_embedding,
 }
 
 # 训练配置
@@ -124,4 +129,14 @@ wandb_config = {
 
 # 生成配置文件
 generate_config_file(folder_path, model_config, training_config)
+
+
+# 生成命令行
 print(f"file path: {folder_path}/{name}.yaml")
+
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+command = f"python train.py --config conf/cust_models/{name}.yaml"
+with open("command.txt", "a") as file:
+    file.write(f'echo "Running Task:{name} Time:{current_time}"\n')
+    file.write(command)
+    file.write("\n\n")

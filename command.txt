@@ -1,0 +1,245 @@
+echo "Running Task:15Aug_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-15 12:59:45"
+python train.py --config conf/cust_models/15Aug_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+echo "Running Task:15Aug_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-15 13:04:51"
+python train.py --config conf/cust_models/15Aug_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+echo "Running Task:15Aug_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingTrue Time:2023-08-15 13:05:28"
+python train.py --config conf/cust_models/15Aug_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingTrue.yaml
+
+
+
+echo "Running Task:16Aug_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-16 03:05:36"
+python train.py --config conf/cust_models/16Aug_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:16Aug_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-16 03:05:59"
+python train.py --config conf/cust_models/16Aug_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+
+
+echo "Running Task:16Aug_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-16 03:54:39"
+python train.py --config conf/cust_models/16Aug_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:16Aug_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-16 03:54:52"
+python train.py --config conf/cust_models/16Aug_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:16Aug_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-16 03:54:58"
+python train.py --config conf/cust_models/16Aug_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:16Aug_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-16 03:55:30"
+python train.py --config conf/cust_models/16Aug_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+
+8.18
+
+echo "Running Task:18Aug_Curriculum_T_run1_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:33:14"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run1_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run2_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:04"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run2_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run3_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:10"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run3_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run4_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:15"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run4_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run5_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:19"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run5_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run6_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:27"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run6_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run7_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:31"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run7_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run8_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:39"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run8_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run9_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:43"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run9_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_T_run10_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse Time:2023-08-18 16:34:48"
+python train.py --config conf/cust_models/18Aug_Curriculum_T_run10_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumTrue_p_embeddingFalse.yaml
+
+
+
+
+
+echo "Running Task:18Aug_Curriculum_F_run1_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:05"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run1_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run2_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:14"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run2_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run3_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:18"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run3_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run4_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:23"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run4_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run5_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:27"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run5_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run6_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:31"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run6_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run7_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:36"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run7_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run8_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:41"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run8_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run9_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:45"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run9_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:18Aug_Curriculum_F_run10_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-18 17:11:51"
+python train.py --config conf/cust_models/18Aug_Curriculum_F_run10_lstm_20dim_10layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+
+
+
+
+20n Aug
+
+echo "Running Task:20Aug_Curriculum_F_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:56:07"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:56:32"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:56:38"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run4_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:56:43"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run4_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run5_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:56:48"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run5_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run6_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:56:55"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run6_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run7_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:57:00"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run7_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run8_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:57:07"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run8_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run9_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:57:12"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run9_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_F_run10_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse Time:2023-08-20 13:57:17"
+python train.py --config conf/cust_models/20Aug_Curriculum_F_run10_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:57:31"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:57:35"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:57:41"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run4_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:57:46"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run4_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run5_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:57:51"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run5_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run6_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:57:57"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run6_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run7_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:58:01"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run7_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run8_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:58:06"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run8_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run9_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:58:11"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run9_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+echo "Running Task:20Aug_Curriculum_T_run10_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse Time:2023-08-20 13:58:16"
+python train.py --config conf/cust_models/20Aug_Curriculum_T_run10_lstm_20dim_10layer_256_lr0.0001_dropout0.1_curriculumTrue_p_embeddingFalse.yaml
+
+
+
+
+todo
+echo "Running Task:21Aug_dropout0.2_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:38:26"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:38:39"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:38:45"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run4_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:39:01"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run4_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run5_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:39:08"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run5_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run6_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:39:14"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run6_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run7_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:39:20"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run7_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run8_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:39:25"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run8_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run9_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:39:30"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run9_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.2_run10_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:39:40"
+python train.py --config conf/cust_models/21Aug_dropout0.2_run10_lstm_20dim_10layer_256_lr0.0001_dropout0.2_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:12"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run1_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:20"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run2_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:26"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run3_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run4_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:31"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run4_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run5_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:36"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run5_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run6_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:41"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run6_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run7_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:45"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run7_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run8_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:51"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run8_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run9_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:40:55"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run9_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:21Aug_dropout0.4_run10_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse Time:2023-08-22 03:41:03"
+python train.py --config conf/cust_models/21Aug_dropout0.4_run10_lstm_20dim_10layer_256_lr0.0001_dropout0.4_curriculumFalse_p_embeddingFalse.yaml
+
+
+25 Aug
+
+
+echo "Running Task:25Aug_5layer_droupout0_run1_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-25 21:36:03"
+python train.py --config conf/cust_models/25Aug_5layer_droupout0_run1_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:25Aug_5layer_droupout0_run2_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-25 21:36:11"
+python train.py --config conf/cust_models/25Aug_5layer_droupout0_run2_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:25Aug_5layer_droupout0_run3_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-25 21:36:16"
+python train.py --config conf/cust_models/25Aug_5layer_droupout0_run3_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:25Aug_5layer_droupout0_run4_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-25 21:36:21"
+python train.py --config conf/cust_models/25Aug_5layer_droupout0_run4_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+
+echo "Running Task:25Aug_5layer_droupout0_run5_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse Time:2023-08-25 21:36:25"
+python train.py --config conf/cust_models/25Aug_5layer_droupout0_run5_lstm_20dim_5layer_512_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse.yaml
+

@@ -43,6 +43,7 @@ def build_model(conf):
             n_layer=conf.n_layer,
             bidirectional=False,  # 设置为True以使用双向LSTM，如果需要的话
             p_dropout=conf.p_dropout,
+            has_p_embedding=conf.has_p_embedding,
         )
 
     else:
@@ -325,7 +326,14 @@ class TransformerModel(nn.Module):
 
 class LSTMModel(nn.Module):
     def __init__(
-        self, n_dims, n_positions, n_embd, n_layer, bidirectional=False, p_dropout=0.0
+        self,
+        n_dims,
+        n_positions,
+        n_embd,
+        n_layer,
+        bidirectional=False,
+        p_dropout=0.0,
+        has_p_embedding=False,
     ):
         super(LSTMModel, self).__init__()
         self.name = f"lstm_embd={n_embd}_layer={n_layer}_{'bidirectional' if bidirectional else 'unidirectional'}"
@@ -339,8 +347,8 @@ class LSTMModel(nn.Module):
 
         self._read_in = nn.Linear(n_dims, n_embd)
 
+        self.has_p_embedding = has_p_embedding  # Originally set to False, if True, then use positional embedding
         self.wpe = nn.Embedding(n_positions, self.n_embd)  # positional embedding
-        print(f"self.wpe: {self.wpe}")
 
         self._lstm = nn.LSTM(
             input_size=n_embd,
@@ -379,18 +387,18 @@ class LSTMModel(nn.Module):
         embeds = self._read_in(zs)  # token embedding: bsize x 2*n_points x n_embd
 
         # Add positional embedding
-        input_shape = embeds.size()
-        position_ids = torch.arange(
-            0, input_shape[-2], dtype=torch.long, device=zs.device
-        )
-        position_ids = position_ids.unsqueeze(0).view(-1, input_shape[-2])
-        position_embeds = self.wpe(position_ids)
+        if self.has_p_embedding:
+            input_shape = embeds.size()
+            position_ids = torch.arange(
+                0, input_shape[-2], dtype=torch.long, device=zs.device
+            )
+            position_ids = position_ids.unsqueeze(0).view(-1, input_shape[-2])
+            position_embeds = self.wpe(position_ids)
 
-        position_embeds = position_embeds.repeat(
-            input_shape[0], 1, 1
-        )  # input_shape[0]:batch size
-
-        embeds = position_embeds + embeds
+            position_embeds = position_embeds.repeat(
+                input_shape[0], 1, 1
+            )  # input_shape[0]:batch size
+            embeds = position_embeds + embeds
 
         if DEBUG_forward:
             print("Inside models LSTMModel:forward")

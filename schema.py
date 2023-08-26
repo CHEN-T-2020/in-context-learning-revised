@@ -20,7 +20,8 @@ model_schema = {
     "n_embd": merge(tinteger, required),
     "n_layer": merge(tinteger, required),
     "n_head": merge(tinteger, required),
-    "p_dropout": merge(tfloat, nullable),
+    "p_dropout": merge(tfloat, nullable),  # dropout use in LSTM model
+    "has_p_embedding": merge(tboolean, nullable),  # if has p_embedding
 }
 
 
