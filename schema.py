@@ -22,6 +22,7 @@ model_schema = {
     "n_head": merge(tinteger, required),
     "p_dropout": merge(tfloat, nullable),  # dropout use in LSTM model
     "has_p_embedding": merge(tboolean, nullable),  # if has p_embedding
+    "use_first_n_layer": merge(tinteger, nullable),  # use first n layers
 }
 
 

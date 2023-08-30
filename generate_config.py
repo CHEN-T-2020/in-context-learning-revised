@@ -13,15 +13,15 @@ p_dropout = 0
 curriculum = False
 has_p_embedding = False
 
-date = "25Aug"
-tag = "5layer_droupout0_run5"
+date = "29Aug"
+tag = "MultiLayerLSTM_test"
 
 if family == "mlp":
     n_positions = 2 * n_dims + 1
 elif family == "gpt2" or family == "lstm":
     n_positions = 5 * n_dims + 1
 
-train_steps = 500001
+train_steps = 5001
 
 # for curriculum learning
 n_dims_start = n_dims // 4 if curriculum else n_dims

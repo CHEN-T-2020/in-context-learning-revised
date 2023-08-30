@@ -39,11 +39,13 @@ def build_model(conf):
         model = LSTMModel(
             n_dims=conf.n_dims,
             n_positions=conf.n_positions,
-            n_embd=conf.n_embd,
+            n_embd=conf.n_embd, # n_embd is the width of hidden layer
             n_layer=conf.n_layer,
-            bidirectional=False,  # 设置为True以使用双向LSTM，如果需要的话
+            bidirectional=False,  # we do not use bidirectional lstm
             p_dropout=conf.p_dropout,
             has_p_embedding=conf.has_p_embedding,
+            use_partial=False,
+            use_first_n_layer=conf.use_first_n_layer
         )
 
     else:
@@ -323,6 +325,28 @@ class TransformerModel(nn.Module):
 
         return prediction[:, ::2, 0][:, inds]  # predict only on xs
 
+# use by LSTMModel
+class MultiLayerLSTM(nn.Module):
+    def __init__(self, num_layers, input_size, hidden_size, batch_first=True, bidirectional=False, p_dropout=0.0):
+        super(MultiLayerLSTM, self).__init__()
+        self.num_layers = num_layers
+        self.lstm_layers = nn.ModuleList([
+            nn.LSTM(
+                input_size=input_size if layer == 0 else hidden_size,
+                hidden_size=hidden_size,
+                bidirectional=bidirectional,
+                batch_first=batch_first,
+                dropout=p_dropout,
+                
+            ) for layer in range(num_layers)
+        ])
+
+    def forward(self, x):
+        outputs = []
+        for layer in self.lstm_layers:
+            x, _ = layer(x)
+            outputs.append(x)
+        return outputs
 
 class LSTMModel(nn.Module):
     def __init__(
@@ -334,6 +358,8 @@ class LSTMModel(nn.Module):
         bidirectional=False,
         p_dropout=0.0,
         has_p_embedding=False,
+        use_partial=False, 
+        use_first_n_layer=100
     ):
         super(LSTMModel, self).__init__()
         self.name = f"lstm_embd={n_embd}_layer={n_layer}_{'bidirectional' if bidirectional else 'unidirectional'}"
@@ -350,15 +376,36 @@ class LSTMModel(nn.Module):
         self.has_p_embedding = has_p_embedding  # Originally set to False, if True, then use positional embedding
         self.wpe = nn.Embedding(n_positions, self.n_embd)  # positional embedding
 
-        self._lstm = nn.LSTM(
+        # already give use_first_n_layer a value: 100, why still none???
+        if not use_first_n_layer  or use_first_n_layer > n_layer:
+            self.first_n_layer = n_layer  
+        else:
+            self.first_n_layer = use_first_n_layer
+
+        self.use_partial = use_partial
+        if self.first_n_layer < n_layer:
+            self.use_partial = True
+        print("use first n layer:", self.first_n_layer)
+        print("use partial model:", self.use_partial)
+        
+        # self._lstm = nn.LSTM(
+        #     input_size=n_embd,
+        #     hidden_size=n_embd,
+        #     num_layers=n_layer,
+        #     bidirectional=bidirectional,
+        #     batch_first=True,
+        #     dropout=p_dropout,  # dropout rate
+        # )
+
+        self._lstm = MultiLayerLSTM(
             input_size=n_embd,
             hidden_size=n_embd,
             num_layers=n_layer,
             bidirectional=bidirectional,
             batch_first=True,
-            dropout=p_dropout,  # dropout rate
-        )
-        self._read_out = nn.Linear(n_embd, 1)
+            p_dropout=p_dropout,  # dropout rate
+         )
+        self._read_out = nn.Linear(n_embd, 1) # read out layer: same with TransformerModel
 
     @staticmethod
     def _combine(xs_b, ys_b):
@@ -383,7 +430,8 @@ class LSTMModel(nn.Module):
             if max(inds) >= ys.shape[1] or min(inds) < 0:
                 raise ValueError("inds contain indices where xs and ys are not defined")
 
-        zs = self._combine(xs, ys)
+        zs = self._combine(xs, ys) # bsize x 2*n_points(1 point have x and y) x n_dims
+        # _read_in (n_dims, n_embd)
         embeds = self._read_in(zs)  # token embedding: bsize x 2*n_points x n_embd
 
         # Add positional embedding
@@ -404,16 +452,25 @@ class LSTMModel(nn.Module):
             print("Inside models LSTMModel:forward")
             print(f"xs.shape: {xs.shape}")
             print(f"ys.shape: {ys.shape}")
-            print(f"zs.shape: {zs.shape}")
+            print(f"zs.shape: {zs.shape}") # bsize x 2*n_points x n_dims
             print(f"zs: {zs}")
-            print(f"embeds.shape: {embeds.shape}")
+            print(f"embeds.shape: {embeds.shape}") # bsize x 2*n_points x n_embd
             print(f"embeds: {embeds}\n")
 
         # LSTM part
-        lstm_output, _ = self._lstm(embeds)
 
-        prediction = self._read_out(lstm_output)
-        return prediction[:, ::2, 0][:, inds]  # predict only on xs
+        # lstm_output, (hidden_states, cell_states) = self._lstm(embeds)
+        # # output: bsize x 2*n_points x n_embd
+        # # hidden_states: n_layer x bsize x n_embd
+        # # cell_states: n_layer x bsize x n_embd
+
+        lstm_output = self._lstm(embeds)
+        lstm_output_i = lstm_output[self.first_n_layer - 1]  # only the first n layer
+        prediction = self._read_out(lstm_output_i) 
+        if self.use_partial:
+            return prediction[:, ::2, 0][:, inds], lstm_output
+        else:
+            return prediction[:, ::2, 0][:, inds]  # predict only on xs
 
 
 class NNModel:
