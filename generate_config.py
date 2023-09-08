@@ -2,8 +2,8 @@ import os
 from datetime import datetime
 
 family = "lstm"
-n_embd = 512
-n_layer = 5
+n_embd = 256
+n_layer = 1
 
 n_dims = 20
 
@@ -12,16 +12,17 @@ lr = 0.0001
 p_dropout = 0
 curriculum = False
 has_p_embedding = False
+has_layer_norm = False
 
-date = "29Aug"
-tag = "MultiLayerLSTM_test"
+date = "6Sep"
+tag = "1layer256"
 
 if family == "mlp":
     n_positions = 2 * n_dims + 1
 elif family == "gpt2" or family == "lstm":
     n_positions = 5 * n_dims + 1
 
-train_steps = 5001
+train_steps = 500001  # originally 500001
 
 # for curriculum learning
 n_dims_start = n_dims // 4 if curriculum else n_dims
@@ -30,7 +31,7 @@ n_points_start = 2 * n_dims_start + 1
 n_points_end = 2 * n_dims_end + 1
 
 
-name = f"{date}_{tag}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}_curriculum{curriculum}_p_embedding{has_p_embedding}"
+name = f"{date}_{tag}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}_curriculum{curriculum}_p_embedding{has_p_embedding}_layernorm{has_layer_norm}"
 
 # 指定文件夹路径
 folder_path = "/home/tianqi/in-context-learning-main/src/conf/cust_models"
@@ -95,6 +96,7 @@ model_config = {
     "n_positions": n_positions,
     "p_dropout": p_dropout,
     "has_p_embedding": has_p_embedding,
+    "has_layer_norm": has_layer_norm,
 }
 
 # 训练配置

@@ -2,9 +2,9 @@ model:
   family: lstm
   has_p_embedding: false
   n_dims: 20
-  n_embd: 512
+  n_embd: 256
   n_head: 8
-  n_layer: 5
+  n_layer: 10
   n_positions: 101
   p_dropout: 0
   use_first_n_layer: 1
@@ -29,7 +29,7 @@ training:
   save_every_steps: 1000
   task: linear_regression
   task_kwargs: {}
-  train_steps: 10001
+  train_steps: 50001
 wandb:
   entity: tianqi_chen
   log_every_steps: 100

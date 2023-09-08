@@ -39,13 +39,14 @@ def build_model(conf):
         model = LSTMModel(
             n_dims=conf.n_dims,
             n_positions=conf.n_positions,
-            n_embd=conf.n_embd, # n_embd is the width of hidden layer
+            n_embd=conf.n_embd,  # n_embd is the width of hidden layer
             n_layer=conf.n_layer,
             bidirectional=False,  # we do not use bidirectional lstm
             p_dropout=conf.p_dropout,
             has_p_embedding=conf.has_p_embedding,
             use_partial=False,
-            use_first_n_layer=conf.use_first_n_layer
+            use_first_n_layer=conf.use_first_n_layer,
+            has_layer_norm=conf.has_layer_norm,
         )
 
     else:
@@ -325,28 +326,85 @@ class TransformerModel(nn.Module):
 
         return prediction[:, ::2, 0][:, inds]  # predict only on xs
 
+
 # use by LSTMModel
+# class MultiLayerLSTM(nn.Module):
+#     def __init__(
+#         self,
+#         num_layers,
+#         input_size,
+#         hidden_size,
+#         batch_first=True,
+#         bidirectional=False,
+#         p_dropout=0.0,
+#         has_layer_norm=False,
+#     ):
+#         super(MultiLayerLSTM, self).__init__()
+#         self.num_layers = num_layers
+#         self.lstm_layers = nn.ModuleList()
+#         for layer in range(num_layers):
+#             self.lstm_layers.append(
+#                 nn.LSTM(
+#                     input_size=input_size if layer == 0 else hidden_size,
+#                     hidden_size=hidden_size,
+#                     bidirectional=bidirectional,
+#                     batch_first=batch_first,
+#                 )
+#             )
+#             self.lstm_layers.append(nn.LayerNorm(hidden_size))
+#             self.lstm_layers.append(nn.Dropout(p=p_dropout))
+
+#     def forward(self, x):
+#         outputs = []
+#         for layer in self.lstm_layers:
+#             x, _ = layer(x)
+#             outputs.append(x)
+#         return outputs
+
+
 class MultiLayerLSTM(nn.Module):
-    def __init__(self, num_layers, input_size, hidden_size, batch_first=True, bidirectional=False, p_dropout=0.0):
+    def __init__(
+        self,
+        num_layers,
+        input_size,
+        hidden_size,
+        batch_first=True,
+        bidirectional=False,
+        p_dropout=0.0,
+        has_layer_norm=False,
+    ):
         super(MultiLayerLSTM, self).__init__()
         self.num_layers = num_layers
-        self.lstm_layers = nn.ModuleList([
-            nn.LSTM(
+        self.lstm_layers = nn.ModuleList()
+        self.has_layer_norm = has_layer_norm
+
+        for layer in range(num_layers):
+            is_last_layer = layer == num_layers - 1
+
+            lstm_layer = nn.LSTM(
                 input_size=input_size if layer == 0 else hidden_size,
                 hidden_size=hidden_size,
                 bidirectional=bidirectional,
                 batch_first=batch_first,
-                dropout=p_dropout,
-                
-            ) for layer in range(num_layers)
-        ])
+            )
+
+            layer_norm = nn.LayerNorm(hidden_size) if has_layer_norm else nn.Identity()
+
+            dropout = nn.Dropout(p=p_dropout) if not is_last_layer else nn.Identity()
+
+            self.lstm_layers.append(nn.Sequential(lstm_layer, layer_norm, dropout))
+            if DEBUG:
+                print(f"layer {layer}:", self.lstm_layers[-1])
 
     def forward(self, x):
         outputs = []
         for layer in self.lstm_layers:
-            x, _ = layer(x)
+            x, _ = layer[0](x)  # lstm_layer
+            x = layer[1](x)  # layer_norm
+            x = layer[2](x)  # dropout
             outputs.append(x)
         return outputs
+
 
 class LSTMModel(nn.Module):
     def __init__(
@@ -358,8 +416,9 @@ class LSTMModel(nn.Module):
         bidirectional=False,
         p_dropout=0.0,
         has_p_embedding=False,
-        use_partial=False, 
-        use_first_n_layer=100
+        use_partial=False,
+        use_first_n_layer=100,
+        has_layer_norm=False,  # add layer normalization
     ):
         super(LSTMModel, self).__init__()
         self.name = f"lstm_embd={n_embd}_layer={n_layer}_{'bidirectional' if bidirectional else 'unidirectional'}"
@@ -377,8 +436,8 @@ class LSTMModel(nn.Module):
         self.wpe = nn.Embedding(n_positions, self.n_embd)  # positional embedding
 
         # already give use_first_n_layer a value: 100, why still none???
-        if not use_first_n_layer  or use_first_n_layer > n_layer:
-            self.first_n_layer = n_layer  
+        if not use_first_n_layer or use_first_n_layer > n_layer:
+            self.first_n_layer = n_layer
         else:
             self.first_n_layer = use_first_n_layer
 
@@ -387,7 +446,7 @@ class LSTMModel(nn.Module):
             self.use_partial = True
         print("use first n layer:", self.first_n_layer)
         print("use partial model:", self.use_partial)
-        
+
         # self._lstm = nn.LSTM(
         #     input_size=n_embd,
         #     hidden_size=n_embd,
@@ -404,8 +463,11 @@ class LSTMModel(nn.Module):
             bidirectional=bidirectional,
             batch_first=True,
             p_dropout=p_dropout,  # dropout rate
-         )
-        self._read_out = nn.Linear(n_embd, 1) # read out layer: same with TransformerModel
+            has_layer_norm=has_layer_norm,
+        )
+        self._read_out = nn.Linear(
+            n_embd, 1
+        )  # read out layer: same with TransformerModel
 
     @staticmethod
     def _combine(xs_b, ys_b):
@@ -430,7 +492,7 @@ class LSTMModel(nn.Module):
             if max(inds) >= ys.shape[1] or min(inds) < 0:
                 raise ValueError("inds contain indices where xs and ys are not defined")
 
-        zs = self._combine(xs, ys) # bsize x 2*n_points(1 point have x and y) x n_dims
+        zs = self._combine(xs, ys)  # bsize x 2*n_points(1 point have x and y) x n_dims
         # _read_in (n_dims, n_embd)
         embeds = self._read_in(zs)  # token embedding: bsize x 2*n_points x n_embd
 
@@ -452,9 +514,9 @@ class LSTMModel(nn.Module):
             print("Inside models LSTMModel:forward")
             print(f"xs.shape: {xs.shape}")
             print(f"ys.shape: {ys.shape}")
-            print(f"zs.shape: {zs.shape}") # bsize x 2*n_points x n_dims
+            print(f"zs.shape: {zs.shape}")  # bsize x 2*n_points x n_dims
             print(f"zs: {zs}")
-            print(f"embeds.shape: {embeds.shape}") # bsize x 2*n_points x n_embd
+            print(f"embeds.shape: {embeds.shape}")  # bsize x 2*n_points x n_embd
             print(f"embeds: {embeds}\n")
 
         # LSTM part
@@ -466,7 +528,7 @@ class LSTMModel(nn.Module):
 
         lstm_output = self._lstm(embeds)
         lstm_output_i = lstm_output[self.first_n_layer - 1]  # only the first n layer
-        prediction = self._read_out(lstm_output_i) 
+        prediction = self._read_out(lstm_output_i)
         if self.use_partial:
             return prediction[:, ::2, 0][:, inds], lstm_output
         else:
@@ -820,3 +882,127 @@ class XGBoostModel:
             preds.append(pred)
 
         return torch.stack(preds, dim=1)
+
+
+# xs and ys should be on cpu for this method. Otherwise the output maybe off in case when train_xs is not full rank due to the implementation of torch.linalg.lstsq.
+class LeastSquaresModelNewtonMethod:
+    def __init__(self, n_newton_steps=3):
+        self.n_newton_steps = n_newton_steps
+        self.name = f"OLS_newton_inv={n_newton_steps}"
+
+    def newton_inv(self, A):
+        lam = torch.linalg.norm(A @ A.T)
+        # alpha = np.random.uniform(low=0, high=2/lam)
+        alpha = 2 / lam
+        # alpha =  1/(torch.linalg.norm(A, ord=1) * torch.linalg.norm(A, ord=np.inf))
+        inv = alpha * A.T
+        eye = torch.eye(A.shape[0])
+
+        for i in range(self.n_newton_steps):
+            inv = inv @ (2 * eye - A @ inv)
+            # if i > 10:
+            #    inv = inv @ A @ inv
+            # if torch.linalg.norm(inv @ A - eye, ord='fro')/torch.linalg.norm(eye, ord='fro') < 0.5:
+            #    inv = inv @ A @ inv
+        # print(lam, alpha, torch.any(torch.isnan(inv)).item())
+
+        return inv
+
+    def __call__(self, xs, ys, inds=None, return_all_ws=False, return_all_invs=False):
+        xs, ys = xs.cpu(), ys.cpu()
+        if inds is None:
+            inds = range(ys.shape[1])
+        else:
+            if max(inds) >= ys.shape[1] or min(inds) < 0:
+                raise ValueError("inds contain indices where xs and ys are not defined")
+
+        preds = []
+        all_ws = {}
+        all_invs = {}
+        for i in inds:
+            if i == 0:
+                preds.append(torch.zeros_like(ys[:, 0]))  # predict zero for first point
+                continue
+            train_xs, train_ys = xs[:, :i], ys[:, :i]
+            test_x = xs[:, i : i + 1]
+            invs = []
+            ws = torch.zeros(test_x.shape[0], test_x.shape[2], 1)
+            for b in range(test_x.shape[0]):
+                train_x = train_xs[b]
+                train_y = train_ys[b]
+
+                X = train_x.T @ train_x
+                y = train_x.T @ train_y
+                inv = self.newton_inv(X)
+                invs.append(inv[None,])
+                w = inv @ y[:, None]
+
+                ws[b] = w
+
+            invs = torch.cat(invs, dim=0)
+            all_invs[i] = invs
+
+            pred = test_x @ ws
+            preds.append(pred[:, 0, 0])
+            all_ws[i] = ws
+
+        if return_all_ws:
+            if return_all_invs:
+                return torch.stack(preds, dim=1), all_ws, all_invs
+            else:
+                return torch.stack(preds, dim=1), all_ws
+        else:
+            return torch.stack(preds, dim=1)
+
+
+# xs and ys should be on cpu for this method. Otherwise the output maybe off in case when train_xs is not full rank due to the implementation of torch.linalg.lstsq.
+class LeastSquaresModelGradientDescent:
+    def __init__(self, n_steps=3, step_size=1.0, weight_decay=0.0):
+        self.n_steps = n_steps
+        self.step_size = step_size
+        self.weight_decay = weight_decay
+        self.name = f"OLS_GD_steps={n_steps}"
+
+    def gradient_descent(self, X, y):
+        w = torch.rand(X.shape[1], 1)
+
+        for _ in range(self.n_steps):
+            grad = (X.T @ X) @ w - (X.T @ y)[:, None]
+            updates = self.step_size * grad + self.weight_decay * w
+            w = w - updates
+
+        return w
+
+    def __call__(self, xs, ys, inds=None, return_all_ws=False):
+        xs, ys = xs.cpu(), ys.cpu()
+        if inds is None:
+            inds = range(ys.shape[1])
+        else:
+            if max(inds) >= ys.shape[1] or min(inds) < 0:
+                raise ValueError("inds contain indices where xs and ys are not defined")
+
+        preds = []
+        all_ws = {}
+        for i in inds:
+            if i == 0:
+                preds.append(torch.zeros_like(ys[:, 0]))  # predict zero for first point
+                continue
+            train_xs, train_ys = xs[:, :i], ys[:, :i]
+            test_x = xs[:, i : i + 1]
+
+            ws = torch.zeros(test_x.shape[0], test_x.shape[2], 1)
+
+            for b in range(test_x.shape[0]):
+                train_x = train_xs[b]
+                train_y = train_ys[b]
+
+                w = self.gradient_descent(train_x, train_y)
+                ws[b] = w
+
+            pred = test_x @ ws
+            preds.append(pred[:, 0, 0])
+            all_ws[i] = ws
+        if return_all_ws:
+            return torch.stack(preds, dim=1), all_ws
+        else:
+            return torch.stack(preds, dim=1)
