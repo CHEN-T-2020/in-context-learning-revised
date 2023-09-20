@@ -2,26 +2,27 @@ import os
 from datetime import datetime
 
 family = "lstm"
-n_embd = 256
-n_layer = 1
+n_embd = 512
+n_layer = 5
 
 n_dims = 20
 
 lr = 0.0001
 
-p_dropout = 0
+p_dropout = 0.1
 curriculum = False
 has_p_embedding = False
 has_layer_norm = False
-
-date = "6Sep"
-tag = "1layer256"
+SKEW = True
+date = "14Sep"
+tag = "skew_100"
 
 if family == "mlp":
     n_positions = 2 * n_dims + 1
 elif family == "gpt2" or family == "lstm":
     n_positions = 5 * n_dims + 1
 
+data = "skew" if SKEW == True else "gaussian"
 train_steps = 500001  # originally 500001
 
 # for curriculum learning
@@ -29,6 +30,10 @@ n_dims_start = n_dims // 4 if curriculum else n_dims
 n_dims_end = n_dims
 n_points_start = 2 * n_dims_start + 1
 n_points_end = 2 * n_dims_end + 1
+
+
+# n_points_start = 5 * n_dims_start + 1
+# n_points_end = 5 * n_dims_end + 1
 
 
 name = f"{date}_{tag}_{family}_{n_dims}dim_{n_layer}layer_{n_embd}_lr{lr}_dropout{p_dropout}_curriculum{curriculum}_p_embedding{has_p_embedding}_layernorm{has_layer_norm}"
@@ -103,7 +108,7 @@ model_config = {
 training_config = {
     "resume_id": name,
     "task": "linear_regression",
-    "data": "gaussian",
+    "data": data,
     "task_kwargs": "{" + "}",
     "batch_size": 64,
     "learning_rate": lr,

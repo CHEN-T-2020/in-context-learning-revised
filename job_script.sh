@@ -16,5 +16,8 @@ source ~/.bashrc
 source activate /home/tianqi/anaconda3/envs/in-context-learning
 
 # Task 1
-echo "Running Task:6Sep_1layer256_lstm_20dim_1layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-06 14:19:17"
-python train.py --config conf/cust_models/6Sep_1layer256_lstm_20dim_1layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+echo "Running Task:14Sep_skew_100_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-15 02:04:28"
+python train.py --config conf/cust_models/14Sep_skew_100_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+
+

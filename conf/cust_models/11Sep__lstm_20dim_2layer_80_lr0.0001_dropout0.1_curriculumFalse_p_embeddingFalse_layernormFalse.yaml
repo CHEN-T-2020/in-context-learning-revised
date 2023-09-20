@@ -1,0 +1,33 @@
+model:
+    family: lstm
+    n_embd: 80
+    n_layer: 2
+    n_head: 8
+    n_dims: 20
+    n_positions: 101
+    p_dropout: 0.1
+    has_p_embedding: False
+    has_layer_norm: False
+
+training:
+    resume_id: 11Sep__lstm_20dim_2layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse
+    task: linear_regression
+    data: gaussian
+    task_kwargs: {}
+    batch_size: 64
+    learning_rate: 0.0001
+    save_every_steps: 1000
+    keep_every_steps: 100000
+    train_steps: 1000001
+    curriculum:
+        dims: {'start': 20, 'end': 20, 'inc': 1, 'interval': 2000}
+        points: {'start': 41, 'end': 41, 'inc': 2, 'interval': 2000}
+
+out_dir: ../models/linear_regression
+
+wandb:
+    name: 11Sep__lstm_20dim_2layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse
+    project: in-context-training
+    entity: tianqi_chen
+    notes: 
+    log_every_steps: 1000

@@ -1,0 +1,34 @@
+model:
+    family: lstm
+    n_embd: 512
+    n_layer: 5
+    n_head: 8
+    n_dims: 20
+    n_positions: 101
+    p_dropout: 0.1
+    has_p_embedding: False
+
+    use_first_n_layer: 1 # will change according to layer
+
+training:
+    train_steps: 100001 # originally 500001
+    resume_id: probing_1 # will change according to layer
+    task: linear_regression
+    data: skew
+    task_kwargs: {}
+    batch_size: 64
+    learning_rate: 0.0001
+    save_every_steps: 1000
+    keep_every_steps: 100000
+    curriculum:
+        dims: {'start': 20, 'end': 20, 'inc': 1, 'interval': 2000}
+        points: {'start': 101, 'end': 101, 'inc': 2, 'interval': 2000}
+
+out_dir: ../models/by_layer_linear/
+
+wandb:
+    name: "linear_regression_probing_1" # will change according to layer
+    project: in-context-training-probtest
+    entity: tianqi_chen
+    notes:
+    log_every_steps: 100

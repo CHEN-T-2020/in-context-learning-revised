@@ -51,6 +51,8 @@ task = "linear_regression"
 
 run_id = "pretrained_probing"  # if you train more models, replace with the run_id from the table above
 
+# run_id = "pretrained_skew_probing" # for skew data
+
 run_path = os.path.join(run_dir, task, run_id)
 
 # %%
@@ -163,6 +165,11 @@ def plot_correlation(
             lstsq_model = models.LeastSquaresModelGradientDescent(
                 n_steps=param, step_size=lr
             )
+        elif model_name == "ogd":
+            # lr = 0.01 if "lr" not in kwargs else kwargs["lr"]
+            lstsq_model = models.LeastSquaresModelOnlineGradientDescent(
+                step_size=param
+            )  #
         elif model_name == "knn":
             lstsq_model = models.NNModel(n_neighbors=param)
         method_pred = lstsq_model(xs, ys)
@@ -347,24 +354,12 @@ def plot_correlation(
 # plot_correlation(model_name='newton', possible_model_params=range(1,25))
 
 # %%
-# plot_correlation(
-#     model_name="gd",
-#     possible_hidden_layer=list(range(1, n_layers + 1)),
-#     possible_model_params=list(range(1, 21, 2)),
-# )
+plot_correlation(
+    model_name="gd",
+    possible_hidden_layer=list(range(1, n_layers + 1)),
+    possible_model_params=list(range(1, 21, 1)),
+)
 
-# plot_correlation(
-#     model_name="gd",
-#     possible_model_params=list(range(1, 10, 3)) + list(range(0, 80, 10))[1:],
-#     lr=1e-3,
-# )
-
-# plot_correlation(
-#     model_name="gd",
-#     possible_hidden_layer=list(range(1, n_layers + 1)),
-#     possible_model_params=list(range(0, 150, 10))[1:],
-#     lr=0.005,
-# )
 
 plot_correlation(
     model_name="newton",
@@ -372,24 +367,13 @@ plot_correlation(
     possible_model_params=list(range(1, 24)),
 )
 
-# plot_correlation(
-#     model_name="newton",
-#     possible_hidden_layer=list(range(1, n_layers + 1)),
-#     possible_model_params=list(range(0, 300, 10))[1:],
-#     lr=1e-3,
-# )
 
-# plot_correlation(
-#     model_name="newton",
-#     possible_hidden_layer=list(range(1, n_layers + 1)),
-#     possible_model_params=list(range(0, 300, 10))[1:],
-#     lr=0.005,
-# )
+# ogd
 
 
-# %%
-# plot_correlation(
-#     model_name="knn",
-#     possible_hidden_layer=list(range(1, n_layers + 1)),
-#     possible_model_params=range(1, 31),
-# )
+plot_correlation(
+    model_name="ogd",
+    possible_hidden_layer=list(range(1, n_layers + 1)),
+    possible_model_params=[0.01, 0.02, 0.03, 0.04, 0.05],
+    # lr=0.04,
+)

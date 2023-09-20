@@ -342,7 +342,9 @@ def baseline_names(name):
     if "lasso" in name:
         alpha = name.split("_")[1].split("=")[1]
         return f"Lasso (alpha={alpha})"
-    if "gd" in name:
+    if "ogd" in name:
+        return "OGD"
+    elif "gd" in name:
         return "2-layer NN, GD"
     if "decision_tree" in name:
         return "Greedy Tree Learning"

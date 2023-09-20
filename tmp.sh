@@ -5,4 +5,4 @@
 source ~/.bashrc
 source activate /home/tianqi/anaconda3/envs/in-context-learning
 
-python train_linear.py --config conf/probing/linear_regression_probing_10.yaml
+python train_linear.py --config conf/probing/linear_regression_skew_probing_5.yaml

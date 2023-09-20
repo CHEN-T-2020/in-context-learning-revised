@@ -1006,3 +1006,57 @@ class LeastSquaresModelGradientDescent:
             return torch.stack(preds, dim=1), all_ws
         else:
             return torch.stack(preds, dim=1)
+
+
+# online gradient descent
+class LeastSquaresModelOnlineGradientDescent:
+    def __init__(self, step_size=1.0, weight_decay=0.0):
+        self.step_size = step_size
+        self.weight_decay = weight_decay
+        self.name = f"OLS_OGD_step_size={step_size}"
+
+    def gradient_descent(self, X, y):
+        w = torch.rand(X.shape[1], 1)
+        n_samples = X.shape[0]
+        for i in range(n_samples):
+            xi = X[i][:, None]
+            yi = y[i]
+            grad = xi @ xi.T @ w - yi * xi
+            updates = self.step_size * grad + self.weight_decay * w
+            w = w - updates
+
+        return w
+
+    def __call__(self, xs, ys, inds=None, return_all_ws=False):
+        xs, ys = xs.cpu(), ys.cpu()
+        if inds is None:
+            inds = range(ys.shape[1])
+        else:
+            if max(inds) >= ys.shape[1] or min(inds) < 0:
+                raise ValueError("inds contain indices where xs and ys are not defined")
+
+        preds = []
+        all_ws = {}
+        for i in inds:
+            if i == 0:
+                preds.append(torch.zeros_like(ys[:, 0]))  # predict zero for first point
+                continue
+            train_xs, train_ys = xs[:, :i], ys[:, :i]
+            test_x = xs[:, i : i + 1]
+
+            ws = torch.zeros(test_x.shape[0], test_x.shape[2], 1)
+
+            for b in range(test_x.shape[0]):
+                train_x = train_xs[b]
+                train_y = train_ys[b]
+
+                w = self.gradient_descent(train_x, train_y)
+                ws[b] = w
+
+            pred = test_x @ ws
+            preds.append(pred[:, 0, 0])
+            all_ws[i] = ws
+        if return_all_ws:
+            return torch.stack(preds, dim=1), all_ws
+        else:
+            return torch.stack(preds, dim=1)

@@ -351,3 +351,126 @@ python train.py --config conf/cust_models/6Sep_1layer256_lstm_20dim_1layer_256_l
 echo "Running Task:6Sep_1layer256_lstm_20dim_1layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-06 14:19:17"
 python train.py --config conf/cust_models/6Sep_1layer256_lstm_20dim_1layer_256_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
 
+echo "Running Task:7Sep_1layer128_lstm_20dim_1layer_128_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-07 23:05:24"
+python train.py --config conf/cust_models/7Sep_1layer128_lstm_20dim_1layer_128_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:7Sep_1layer128_lstm_20dim_1layer_64_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-07 23:05:47"
+python train.py --config conf/cust_models/7Sep_1layer128_lstm_20dim_1layer_64_lr0.0001_dropout0_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:7Sep__lstm_20dim_10layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-08 00:28:37"
+python train.py --config conf/cust_models/7Sep__lstm_20dim_10layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:7Sep__lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-08 00:28:51"
+python train.py --config conf/cust_models/7Sep__lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:9Sep_run1_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-09 15:19:00"
+python train.py --config conf/cust_models/9Sep_run1_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:9Sep_run2_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-09 15:19:10"
+python train.py --config conf/cust_models/9Sep_run2_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:9Sep_run3_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-09 15:19:15"
+python train.py --config conf/cust_models/9Sep_run3_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:9Sep_run4_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-09 15:19:20"
+python train.py --config conf/cust_models/9Sep_run4_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:9Sep_run5_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-09 15:19:26"
+python train.py --config conf/cust_models/9Sep_run5_lstm_20dim_10layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:10Sep__lstm_20dim_1layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-10 11:19:06"
+python train.py --config conf/cust_models/10Sep__lstm_20dim_1layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:10Sep_run1_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-10 11:19:25"
+python train.py --config conf/cust_models/10Sep_run1_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:10Sep_run2_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-10 11:19:30"
+python train.py --config conf/cust_models/10Sep_run2_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:10Sep_run3_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-10 11:19:36"
+python train.py --config conf/cust_models/10Sep_run3_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:10Sep_run4_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-10 11:19:41"
+python train.py --config conf/cust_models/10Sep_run4_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:10Sep_run5_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-10 11:19:46"
+python train.py --config conf/cust_models/10Sep_run5_lstm_20dim_10layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:11Sep__lstm_20dim_2layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-11 01:08:49"
+python train.py --config conf/cust_models/11Sep__lstm_20dim_2layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:11Sep__lstm_20dim_3layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-11 01:09:03"
+python train.py --config conf/cust_models/11Sep__lstm_20dim_3layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:11Sep__lstm_20dim_4layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-11 01:09:08"
+python train.py --config conf/cust_models/11Sep__lstm_20dim_4layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:11Sep__lstm_20dim_5layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-11 01:09:14"
+python train.py --config conf/cust_models/11Sep__lstm_20dim_5layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:11Sep__lstm_20dim_5layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-11 14:09:02"
+python train.py --config conf/cust_models/11Sep__lstm_20dim_5layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:11Sep__lstm_20dim_4layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 03:08:21"
+python train.py --config conf/cust_models/11Sep__lstm_20dim_4layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:11Sep__lstm_20dim_2layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 03:08:27"
+python train.py --config conf/cust_models/11Sep__lstm_20dim_2layer_80_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:11Sep__lstm_20dim_1layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 20:25:28"
+python train.py --config conf/cust_models/11Sep__lstm_20dim_1layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:12Sep__lstm_20dim_1layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 20:25:53"
+python train.py --config conf/cust_models/12Sep__lstm_20dim_1layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:12Sep__lstm_20dim_2layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 20:25:59"
+python train.py --config conf/cust_models/12Sep__lstm_20dim_2layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:12Sep__lstm_20dim_3layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 20:26:04"
+python train.py --config conf/cust_models/12Sep__lstm_20dim_3layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:12Sep__lstm_20dim_3layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 20:26:11"
+python train.py --config conf/cust_models/12Sep__lstm_20dim_3layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:12Sep__lstm_20dim_5layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 20:26:15"
+python train.py --config conf/cust_models/12Sep__lstm_20dim_5layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:12Sep_test_lstm_20dim_5layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-12 22:08:57"
+python train.py --config conf/cust_models/12Sep_test_lstm_20dim_5layer_64_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 14:18:49"
+python train.py --config conf/cust_models/13Sep_skew_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 14:22:01"
+python train.py --config conf/cust_models/13Sep_skew_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 14:22:19"
+python train.py --config conf/cust_models/13Sep_skew_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_lstm_20dim_2layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 14:23:11"
+python train.py --config conf/cust_models/13Sep_skew_lstm_20dim_2layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_lstm_20dim_1layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 14:23:16"
+python train.py --config conf/cust_models/13Sep_skew_lstm_20dim_1layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_lstm_20dim_1layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 14:33:45"
+python train.py --config conf/cust_models/13Sep_skew_lstm_20dim_1layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_lstm_20dim_2layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 14:33:51"
+python train.py --config conf/cust_models/13Sep_skew_lstm_20dim_2layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 14:33:56"
+python train.py --config conf/cust_models/13Sep_skew_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_skew_100_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 19:10:17"
+python train.py --config conf/cust_models/13Sep_skew_100_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:13Sep_standard_100_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-13 19:10:51"
+python train.py --config conf/cust_models/13Sep_standard_100_lstm_20dim_5layer_128_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:14Sep_standard_100_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-15 02:04:08"
+python train.py --config conf/cust_models/14Sep_standard_100_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+
+echo "Running Task:14Sep_skew_100_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse Time:2023-09-15 02:04:28"
+python train.py --config conf/cust_models/14Sep_skew_100_lstm_20dim_5layer_512_lr0.0001_dropout0.1_curriculumFalse_p_embeddingFalse_layernormFalse.yaml
+

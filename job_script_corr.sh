@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH --gres=gpu:2080:1           # Request 1 GPU
+#SBATCH --time=4:00:00            # Time limit hrs:min:sec
 #SBATCH --job-name=eval_corr           # Job name
 #SBATCH --output=slurm_output/%j.log # Output and error log path
 
